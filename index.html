@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Travel Planner</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">✈️ Travel Planner</div>
+    <div class="topbar-actions">
+      <button id="btnExport" class="btn btn-secondary" type="button">Export Printable</button>
+      <button id="btnPrint" class="btn btn-secondary" type="button">Print</button>
+      <button id="btnReset" class="btn btn-danger" type="button">Reset</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h2>Trip Info</h2>
+      <div class="grid2">
+        <label>
+          Destination
+          <input id="tripDestination" type="text" placeholder="e.g., Paris" maxlength="80" />
+        </label>
+        <label>
+          Start Date
+          <input id="tripStartDate" type="date" />
+        </label>
+      </div>
+
+      <div class="grid2">
+        <label>
+          Number of Days
+          <input id="tripDays" type="number" min="1" max="60" value="3" />
+        </label>
+        <label>
+          Notes (optional)
+          <input id="tripNotes" type="text" placeholder="e.g., Book museum tickets" maxlength="120" />
+        </label>
+      </div>
+
+      <div class="row" style="margin-top: 10px;">
+        <button id="btnCreateDays" class="btn btn-primary" type="button">Create Days</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="section-head">
+        <h2>Days & Itinerary</h2>
+        <div class="muted" id="daysMeta"></div>
+      </div>
+
+      <div class="days-nav" id="daysNav"></div>
+
+      <div class="itinerary-editor">
+        <h3 id="dayTitle">Day 1</h3>
+
+        <div class="form-row">
+          <label class="time">
+            Time
+            <input id="placeTime" type="time" value="09:00" />
+          </label>
+
+          <label class="place">
+            Place / Activity
+            <input id="placeName" type="text" placeholder="e.g., Louvre Museum" maxlength="80" />
+          </label>
+
+          <label class="duration">
+            Duration (mins)
+            <input id="placeDuration" type="number" min="5" max="1000" step="5" value="120" />
+          </label>
+        </div>
+
+        <div class="form-row">
+          <label class="category">
+            Category
+            <select id="placeCategory">
+              <option value="Sightseeing">Sightseeing</option>
+              <option value="Food">Food</option>
+              <option value="Transport">Transport</option>
+              <option value="Shopping">Shopping</option>
+              <option value="Relax">Relax</option>
+              <option value="Other">Other</option>
+            </select>
+          </label>
+
+          <label class="cost">
+            Est. Cost
+            <input id="placeCost" type="text" placeholder="e.g., €25" maxlength="20" />
+          </label>
+
+          <label class="details" style="flex: 1 1 280px;">
+            Details
+            <input id="placeDetails" type="text" placeholder="optional" maxlength="140" />
+          </label>
+        </div>
+
+        <div class="row">
+          <button id="btnAddPlace" class="btn btn-primary" type="button">Add to Day</button>
+          <button id="btnRemovePlace" class="btn btn-secondary" type="button" disabled>Remove Selected</button>
+        </div>
+
+        <div class="list-wrap">
+          <div class="list-head">
+            <div>Itinerary items</div>
+            <div class="muted" id="dayTotal"></div>
+          </div>
+          <ul id="placeList" class="place-list"></ul>
+          <div id="emptyState" class="empty">
+            Add your first activity for this day.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Save / Load</h2>
+      <div class="row" style="gap: 12px;">
+        <label class="file-label">
+          <span class="muted">Trip JSON file</span>
+          <input id="fileInput" type="file" accept="application/json" />
+        </label>
+
+        <button id="btnLoad" class="btn btn-secondary" type="button">Load JSON</button>
+        <button id="btnSave" class="btn btn-secondary" type="button">Save JSON</button>
+      </div>
+
+      <div class="muted" style="margin-top: 8px;">
+        Tip: Use <b>Export Printable</b> to generate a print-friendly HTML.
+      </div>
+    </section>
+
+    <section class="card" id="exportArea" style="display:none;">
+      <h2>Printable Export</h2>
+      <div class="muted">This preview is what will be exported/printed.</div>
+      <div id="exportPreview" class="print-area"></div>
+    </section>
+
+  </main>
+
+  <dialog id="toast" class="toast" open>
+    <div id="toastMsg"></div>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
+
